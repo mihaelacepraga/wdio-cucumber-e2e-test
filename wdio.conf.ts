@@ -1,4 +1,9 @@
+import dotenv from "dotenv";
+dotenv.config()
+let headless = process.env.HEADLESS
+console.log(`>>The hedless flag: ${headless}`);
 import type { Options } from '@wdio/types'
+
 export const config: Options.Testrunner = {
     //
     // ====================
@@ -85,8 +90,16 @@ export const config: Options.Testrunner = {
         maxInstances: 5,
         //
         browserName: 'chrome',
+        // "goog:chromeOptions": {
+        //     args: headless.toUpperCase() === "Y" ? ["--disable-web-security", "--headless", "--disable-dev-shm-usage", "--no-sandbox", "--window-size=1920,1080"] : []
+        // },
+        "goog:chromeOptions":  {
+            args: headless.toUpperCase() === "Y" ? ["--disable-web-security", "--headless", "--disable-dev-shm-usage", "--no-sandbox", "--window-size=1920,1080" ] :[]
+        },
+        
+
         acceptInsecureCerts: true,
-        timeouts: { implicit: 5000, pageLoad: 20000, script: 30000 },
+        timeouts: { implicit: 10000, pageLoad: 20000, script: 30000  },
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs

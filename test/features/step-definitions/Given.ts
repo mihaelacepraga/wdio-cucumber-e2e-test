@@ -7,9 +7,9 @@ Given(/^Login to a invertory web app$/, async function () {
     await browser.setTimeout({implicit: 5000, pageLoad: 3000})
     await browser.maximizeWindow()
     /**2.Login to inventory */
-    await $("#user-name").setValue("standard_user")
+    await $("#user-name").setValue(process.env.TEST_STD_USERNAME)
     await browser.pause(1000)
-    await $("#password").setValue("secret_sauce")
+    await $("#password").setValue(process.env.TEST_STD_PASSWORD)
     await $("#login-button").click()
     // await browser.pause(1000)
     // // 3.Reload session
